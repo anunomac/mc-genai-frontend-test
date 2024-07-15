@@ -34,3 +34,29 @@ export const getClassificationStatus = async (cid, accessKey) => {
         throw error;  
     }  
 };  
+
+export const addNewModel = async (cid, accessKey) => {  
+    // PLACEHOLDER
+    try {  
+        const response = await axios.get(`${API_URL}/get_status/`, {  
+            params: { cid, access_key: accessKey },  
+        });  
+        return response.data;  
+    } catch (error) {  
+        console.error('Error fetching classification status:', error);  
+        throw error;  
+    }  
+};  
+
+export const validateAndDownloadModel = async (cid, accessKey) => {  
+    // PLACEHOLDER
+    try {  
+        const response = await axios.get(`${API_URL}/get_status/`, {  
+            params: { cid, access_key: accessKey },  
+        });  
+        return response.data;  
+    } catch (error) {  
+        console.error('Error fetching classification status:', error);  
+        throw error;  
+    }  
+}; 
