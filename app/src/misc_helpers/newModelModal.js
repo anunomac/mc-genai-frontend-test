@@ -1,18 +1,28 @@
 import React, { useState } from 'react';  
-import { Modal, Button, Form } from 'react-bootstrap';  
-import { validateAndDownloadModel } from '../misc_helpers/api'; // Assuming you have this API helper  
+import { Modal, Button, Form } from 'react-bootstrap';   
   
+/**  
+ * AddModelModal component allows users to add a new sentiment analysis model.  
+ * @param {Object} props - component props  
+ * @param {boolean} props.show - whether the modal is visible  
+ * @param {Function} props.handleClose - function to close the modal  
+ * @param {Function} props.handleSave - function to save the new model  
+ */ 
+
 const AddModelModal = ({ show, handleClose, handleSave }) => {  
   const [publicName, setPublicName] = useState('');  
   const [realName, setRealName] = useState('');  
   const [password, setPassword] = useState('');  
   const [error, setError] = useState('');  
   
-  const handleSubmit = async (e) => {  
+    /**  
+   * Handle form submission to add a new model  
+   * @param {Event} e - form submission event  
+   */  
+  const handleModelSubmit = async (e) => {  
     e.preventDefault();  
-    try {  
-      await validateAndDownloadModel(realName);  
-      handleSave({ public_name: publicName, real_name: realName });  
+    try { 
+      handleSave({ public_name: publicName, real_name: realName, password: password });  
       handleClose();  
     } catch (err) {  
       setError('Failed to validate or download the model.');  
@@ -25,7 +35,7 @@ const AddModelModal = ({ show, handleClose, handleSave }) => {
         <Modal.Title>Add New Model</Modal.Title>  
       </Modal.Header>  
       <Modal.Body>  
-        <Form onSubmit={handleSubmit}>  
+        <Form onSubmit={handleModelSubmit}>  
           <Form.Group className="mb-3" controlId="publicName">  
             <Form.Label>Public Name</Form.Label>  
             <Form.Control  
@@ -53,7 +63,7 @@ const AddModelModal = ({ show, handleClose, handleSave }) => {
               required  
             />  
           </Form.Group>  
-        <p>You can use models found in: <a target='_blank' href="https://huggingface.co/models?pipeline_tag=text-classification&sort=trending&search=sentiment">huggingface</a>.</p>  
+        <p>You can use models found in: <a target='_blank' rel="noreferrer" href="https://huggingface.co/models?pipeline_tag=text-classification&sort=trending&search=sentiment">huggingface</a>.</p>  
           {error && <p className="text-danger">{error}</p>}  
           <Button variant="primary" type="submit">  
             Add Model  
