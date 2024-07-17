@@ -58,8 +58,8 @@ npm run build
   
 The application interacts with the following API endpoints:  
   
-- `GET /models/` - Fetch sentiment analyzers  
-- `POST /classifications/` - Initiate sentiment analysis  
-- `GET /classifications/` - Fetch classification status  
-- `POST /models/` - Add a new sentiment analysis model  
+- `GET /api/models/` - Fetch sentiment analyzers  
+- `POST /api/models/` - Add a new sentiment analysis model  
+- `POST /api/classifications/` - Initiate sentiment analysis  
+- `GET /api/classifications/` - Fetch classification status  
   
